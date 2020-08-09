@@ -7,7 +7,9 @@
 ' 4. if User Account not already exist in AD we will than proceed further.
 ' 5. We will check the Location whether the user is from NA , EU or AS and we will call the function accordingly.
 '    like NA_CreateUser() , EU_CreateUser() or AS_CreateUser().
-' 6. According to the location we will create the user in sub OU using arrays.
+' 6. If the script not able to find the location it will than ask user to fill the path OU manually while running.
+' 7. According to the location we will create the user in sub OU using arrays.
+' 8. Then we will add all the required group based on location and type(External or Regular).
 
 '****************************************************'
 
