@@ -1,0 +1,5 @@
+SAP num |	UNID	|First Name     |	Last Name |	Type(External or Regular)	| Location	    | Start date	| Password	| Task Number		| Enter the OU Manually(Type: Yes or No)
+========|=======|===============|===========|===========================|===============|=============|===========|===============|================================================
+32908	  | LVKSU	|Mukesh	        | Solanki   |External                   |	NAmerica	    | 3/9/2020	  | P@ssw0rd	| Task4322		  |     Yes
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------										
+67996	  | LINKX	|David          | Short	    |Regular	                  | NA US Elmira	| 15/3/2020	  | Ramu#$34	| Task5670		  |     No
