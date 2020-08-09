@@ -252,5 +252,11 @@ End Function
 
 'Function EU_CreateUser.
 Function EU_CreateUser()
+	'Code to come.
+End function
 
+
+'Function AS_CreateUser.
+Function AS_CreateUser()
+	'Code to come.
 End function
