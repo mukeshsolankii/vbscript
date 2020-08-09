@@ -77,7 +77,8 @@ Else
 	Elseif UCase(Left(Location,1)) = "A" Then
 		AS_CreateUser()
 	Else
-		wscript.echo "Location doesn't exist!" & vbCrLf &"Please enter the location in excel sheet like NAmerica , Europe , Asia !"
+		wscript.echo "Location doesn't exist!" &vbCrLf &"Please enter the location in excel sheet like for:"_
+		&vbCrLf &"USA = NAmerica" &vbCrLf &"Europe = Europe" &vbCrLf &"Asia = Asia"
 	End if
 End if
 
@@ -140,16 +141,20 @@ Function NA_CreateUser()
 		"OU=3rd Party Users,OU=USED,OU=NA,OU=Location,DC=chemtura,DC=com")
 	
 	else
-
-		NA_Loc_arr = Array(" NA US Elmira"," NA US Shelton","NA US El Dorado AR Central","NA US El Dorado AR South")
+		'There are 16 Location in NA.
+		NA_Loc_arr = Array(" NA CA Elmira"," NA US Shelton CT","NA US El Dorado AR Central","NA US El Dorado AR South"_
+		,"NA US El Dorado AR West","NA CA West Hill","NA CA Guelph","NA US East Hanover NJ","NA US Fords NJ Chem",_
+		"NA US Gastonia NC Chem","NA US Mapleton IL","NA US Middlebury CT","NA US Naugatuck CT","NA US Newtown Square PA",_
+		"NA US Perth Amboy NJ","NA US West Lafayette IN")
 		
-		NA_OU_arr = Array("USEA","USSH","USED","USES")
+		NA_OU_arr = Array("CAEL","USSH","USED","USES","USEW","CAGT","CAGU","USEH","USFO","USGA","USMA","USMI","USNA",_
+		"USNS","USPE","USWL")
 		
 		'Here we are mapping the OU according to the location.
 		for i = 0 to UBound(NA_Loc_arr):
 			if Lcase(Location) = Trim(Lcase(NA_Loc_arr(i))) Then
 				NA_OU_index = i
-				wscript.echo "The OU is : " &NA_OU_arr(NA_OU_index)
+				'wscript.echo "The OU is : " &NA_OU_arr(NA_OU_index)
 				Exit For
 			End if
 			if i = UBound(NA_Loc_arr) Then
@@ -162,8 +167,11 @@ Function NA_CreateUser()
 		
 		'We will check if user is external or regular.
 		if UCase(Left(Types,1)) = "E" Then
-			NA_OU = "OU=3rd Party Users,OU="& NA_OU_arr(NA_OU_index) &",OU=NA,OU=Location,DC=chemtura,DC=com"
-		
+			If Ucase(Location) = "NA US MAPLETON IL" Then
+				NA_OU = "OU=Users,OU="& NA_OU_arr(NA_OU_index) &",OU=NA,OU=Location,DC=chemtura,DC=com"
+			Else
+				NA_OU = "OU=3rd Party Users,OU="& NA_OU_arr(NA_OU_index) &",OU=NA,OU=Location,DC=chemtura,DC=com"
+			End if
 		elseif UCase(Left(Types,1)) = "R" Then
 			NA_OU = "OU=Users,OU="& NA_OU_arr(NA_OU_index) &",OU=NA,OU=Location,DC=chemtura,DC=com"
 		
@@ -219,7 +227,7 @@ Function NA_CreateUser()
 	
 	strUserDN = "cn=" &FN &" " &LN &"," &NA_OU
 	
-	'check if user is external or regular and adding group accordingly.
+	'Checking if user is external or regular and adding group accordingly.
 	if UCase(Left(Types,1)) = "E" Then
 		For i = 0 to UBound(NA_External_Groups):
 			on error resume next
@@ -244,7 +252,7 @@ Function NA_CreateUser()
 		next
 	End if
 	
-	wscript.echo "User Account Created!"
+	wscript.echo "User Account Created Successfully inside NA in this OU : " &NA_OU_arr(NA_OU_index)
 End Function
 
 
@@ -252,11 +260,14 @@ End Function
 
 'Function EU_CreateUser.
 Function EU_CreateUser()
-	'Code to come.
+
 End function
+
+
 
 
 'Function AS_CreateUser.
 Function AS_CreateUser()
-	'Code to come.
+
 End function
+
