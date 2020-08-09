@@ -11,6 +11,10 @@
 ' 7. According to the location we will create the user in sub OU using arrays.
 ' 8. Then we will add all the required group based on location and type(External or Regular).
 
+'What other things we want to acheive in this Script is :
+' 1. Create the user mailbox.
+' 2. Enable user on Lync.
+
 '****************************************************'
 
 'Variables.
