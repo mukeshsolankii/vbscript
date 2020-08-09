@@ -167,6 +167,7 @@ Function NA_CreateUser()
 		
 		'We will check if user is external or regular.
 		if UCase(Left(Types,1)) = "E" Then
+			'Exceptional case of Mapilton becouse there is only Users OU inside this and it contain both external and regular users.
 			If Ucase(Location) = "NA US MAPLETON IL" Then
 				NA_OU = "OU=Users,OU="& NA_OU_arr(NA_OU_index) &",OU=NA,OU=Location,DC=chemtura,DC=com"
 			Else
