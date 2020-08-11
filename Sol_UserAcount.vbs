@@ -260,6 +260,29 @@ Function NA_CreateUser()
 	End if
 	
 	wscript.echo "User Account Created Successfully inside NA in this OU : " &NA_OU_arr(NA_OU_index)
+	
+	
+	'We now create the mailbox of User. (Not Tested Yet)
+	StrCmd = "Enable-Mailbox -identity: 'Unid' -Database: 'NADB01' -RetentionPolicy: 'policy name'"
+	Set objshell = CreateObject("Wscript.Shell")
+	Set WshShellExec = objshell.Exec("powershell -command " & StrCmd & "")
+	
+	While WshShellExec.Status = WshRunning
+	    WScript.Sleep 50
+	Wend
+	
+	If WshShellExec.ExitCode = 1 Then
+	    'strOutput = WshShellExec.StdErr.ReadAll
+		strOutput = "Error in Creating the Mailbox!" 
+	Else
+	    'strOutput = WshShellExec.StdOut.ReadAll
+		strOutPut = "MailBox Created Successfully"
+	End If
+	
+	Wscript.echo "" & strOutPut
+	
+	'Mailbox section Completed.
+	
 End Function
 
 
