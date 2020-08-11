@@ -12,8 +12,8 @@
 ' 8. Then we will add all the required group based on location and type(External or Regular).
 
 'What other things we want to acheive in this Script is :
-' 1. Create the user mailbox.
-' 2. Enable user on Lync.
+' 1. Create the user mailbox. (Not Tested!)
+' 2. Enable user on Lync. 
 
 '****************************************************'
 
@@ -262,7 +262,7 @@ Function NA_CreateUser()
 	wscript.echo "User Account Created Successfully inside NA in this OU : " &NA_OU_arr(NA_OU_index)
 	
 	
-	'We now create the mailbox of User. (Not Tested Yet)
+	'**************We now create the mailbox of User. (Not Tested Yet)*****************'
 	StrCmd = "Enable-Mailbox -identity: 'Unid' -Database: 'NADB01' -RetentionPolicy: 'policy name'"
 	Set objshell = CreateObject("Wscript.Shell")
 	Set WshShellExec = objshell.Exec("powershell -command " & StrCmd & "")
