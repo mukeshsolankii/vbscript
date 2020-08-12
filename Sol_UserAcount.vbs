@@ -13,7 +13,7 @@
 
 'What other things we want to acheive in this Script is :
 ' 1. Create the user mailbox. (Not Tested!)
-' 2. Enable user on Lync. 
+' 2. Enable user on Lync. (Not Tested!)
 
 '****************************************************'
 
