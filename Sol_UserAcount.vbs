@@ -261,6 +261,31 @@ Function NA_CreateUser()
 	
 	wscript.echo "User Account Created Successfully inside NA in this OU : " &NA_OU_arr(NA_OU_index)
 	
+	EnableMailboxLync()
+	
+End Function
+
+
+
+
+'Function EU_CreateUser.
+Function EU_CreateUser()
+
+End function
+
+
+
+'Function AS_CreateUser.
+Function AS_CreateUser()
+
+End function
+
+
+
+'Function EnableMailboxLync.
+Function EnableMailboxLync()
+	
+	Dim StrCmd , strLyncCmd , objshell
 	
 	'**************We now create the mailbox of User. (Not Tested Yet)*****************'
 	StrCmd = "Enable-Mailbox -identity: 'Unid' -Database: 'NADB01' -RetentionPolicy: 'policy name'"
@@ -283,21 +308,28 @@ Function NA_CreateUser()
 	
 	'Mailbox section Completed.
 	
+	'**************We now user on Lync server. (Not Tested Yet)*****************'
+	strOutPut = ""
+	strLyncCmd = "Enable-CsUser -Identity 'Ken Myer' -RegistrarPool pool name -Enabled $True -AudioVideoDisabled $True"
+	Set WshShellExec = objshell.Exec("powershell -command " & strLyncCmd & "")
+	
+	While WshShellExec.Status = WshRunning
+	    WScript.Sleep 50
+	Wend
+	
+	If WshShellExec.ExitCode = 1 Then
+	    'strOutput = WshShellExec.StdErr.ReadAll
+		strOutput = "Error in Enabling user on Lync!" 
+	Else
+	    'strOutput = WshShellExec.StdOut.ReadAll
+		strOutPut = "User enabled on Lync Successfully"
+	End If
+	
+	Wscript.echo "" & strOutPut
+	
+	'Lync Section Completed.
+	
+	Set objshell = nothing
+	
 End Function
-
-
-
-
-'Function EU_CreateUser.
-Function EU_CreateUser()
-
-End function
-
-
-
-
-'Function AS_CreateUser.
-Function AS_CreateUser()
-
-End function
 
